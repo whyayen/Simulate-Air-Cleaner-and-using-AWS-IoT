@@ -92,7 +92,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 ![6.png](/images/6.png)
 
-4.3. Type a name for Profile name.
+4.3. Type a name for **Profile name**.
 
 4.4. Go back to IoT thing, click the thing you create previously, then click **Interact**.
 
