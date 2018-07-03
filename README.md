@@ -67,7 +67,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 3.3. Type a name for policy.
 
-3.4. In Add Statements section, type **iot:＊** in Action part, type **＊** in Resource ARN type..
+3.4. In **Add Statements** section, type **iot:*** in Action part, type ***** in Resource ARN type..
 
 ![4.png](/images/4.png)
 
