@@ -28,11 +28,11 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 1.3. Click **Types** under Manage at left navigation bar.
 
-1.4. Click **Create a thing type**.
+1.4. Click **Create**, and you will see **Create a thing type** page.
 
 1.5. Type a name for the thing type.
 
-1.6. Click Create thing type.
+1.6. Click **Create thing type**.
 
 
 ### Create a IoT Thing.
