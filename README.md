@@ -179,7 +179,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 5.16. Select the **IoT_save_DynamoDB** role, and click **Add action**. 
 
-![configure action.png](/images/configure action.png)
+![configure_action.png](/images/configure_action.png)
 
 5.17. Click **Create rule**.
 
