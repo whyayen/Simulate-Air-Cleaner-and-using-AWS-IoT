@@ -179,6 +179,8 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 5.16. Select the **IoT_save_DynamoDB** role, and click **Add action**. 
 
+![configure action.png](/images/configure action.png)
+
 5.17. Click **Create rule**.
 
 5.18. Go back MQTT.fx, type **device/aircleaner** as topic name.
@@ -266,7 +268,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 7.7. Type **Lambda_send_mqtt** as Role name.
 
-7.8. Copy the below code and paste it to policy document.
+7.8. Copy the below code and paste it to policy document, then click **Allow**.
 
 	{
   		"Version": "2012-10-17",
@@ -339,6 +341,8 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 7.22. Type **＊** as attribute, type **device/aircleaner** as topic filter, type **pm=20 AND power = “ON”** as condition.
 
+>please donot copy but type yourself on this condition **pm=20 AND power = “ON”**
+
 7.23. Click Add action, click **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
 7.24. Click **Create a new resource**.
@@ -347,9 +351,9 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 7.26. Select **Choose an existing role** as Role.
 
-7.27. Select Lambda_send_mqtt as Existing role, then Click Create function.
+7.27. Select **Lambda_send_mqtt** as Existing role, then Click Create function.
 
-7.28. Copy the **deviceOFF.js** code and paste it to the Lambda code field, then save.
+7.28. Copy the **deviceOFF.js** code and paste it to the Lambda code field.
 
 7.29. Remember to change your endpoint.
 
