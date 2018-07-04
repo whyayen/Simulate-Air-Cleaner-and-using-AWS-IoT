@@ -165,7 +165,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 5.9. Click **Create table**.
 
-5.10. Type **air_cleaner_message** as name.
+5.10. Type **air_cleaner_message** as Table name.
 
 5.11. Type **device_id** as Partition key, then click **Create**.
 
