@@ -318,6 +318,8 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 7.16. Click **Publish**, then go back to IoT platform. You will see the shadow is change.
 
+![shadow.png](/images/shadow.png)
+
 7.17. Now let try to trigger the rule to open device automatically. Go back MQTT.fx, type **device/aircleaner**.
 
 7.18. Copy below code to MQTT.fx, and change the pm value to **50**, air quality to **RED**.
