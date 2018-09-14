@@ -39,7 +39,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 2.1. Click **Things** under Manage at left navigation bar.
 
-2.2. Click **Register a thing**.
+2.2. Click **Create**.
 
 2.3. Click **Create a single thing**.
 
@@ -67,7 +67,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 3.3. Type a name for policy.
 
-3.4. In **Add Statements** section, type **iot:＊** in Action part, type **＊** in Resource ARN type..
+3.4. In **Add Statements** section, type **iot:＊** in Action part, type **＊** in Resource ARN type.
 
 ![4.png](/images/4.png)
 
@@ -122,7 +122,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 4.15. Click **Connect** to connect the AWS IoT platform.
 
-4.16. Type **/test/topic** in the topic field, and copy below code and paste into the blank field
+4.16. Type **/test/topic** in the topic field, and copy below code and paste into the blank field:
 
 	{
 		"id": "12345678",
@@ -185,7 +185,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 5.18. Go back MQTT.fx, type **device/aircleaner** as topic name.
 
-5.19. Copy the **air_cleaner.json** code and paste to MQTT.fx, then click **Publish**
+5.19. Copy the [**Air_cleaner_test.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/Air_cleaner_test.js) code and paste to MQTT.fx, then click **Publish**.
 
 5.20. Go back to DynamoDB page, and you will see the message save in the table.
 
