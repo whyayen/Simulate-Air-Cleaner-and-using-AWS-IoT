@@ -200,11 +200,11 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 ![12.png](/images/12.png)
 
-6.4. Click **Add action**.
+6.4. Click **Add action** in set one or more actions.
 
 6.5. Select **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
-6.6. Click **Create a new resource**.
+6.6. Click **Create a new Lambda function**.
 
 6.7. Type **Air_warning** as Lambda name.
 
@@ -240,7 +240,13 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 6.13. In **Environment variables** section, type **email** as key, type your email as value, then click **Save**.
 
-6.14. Back to IoT rule create page, click reload and select **Air_warning**, then click **Add action**.
+6.14. Back to IoT rule create page, click reload and select **
+
+
+
+
+
+**, then click **Add action**.
 
 ![13.png](/images/13.png)
 
