@@ -4,7 +4,7 @@
 
 
 ## Scenario
-[AWS IoT](https://aws.amazon.com/iot/) provides secure, bi-directional communication between Internet-connected devices such as sensors, actuators, embedded micro-controllers, or smart appliances and the AWS Cloud. This enables you to collect telemetry data from multiple devices, and store and analyze the data. You can also create applications that enable your users to control these devices from their phones or tablets.
+[AWS IoT] (https://aws.amazon.com/iot/) provides secure, bi-directional communication between Internet-connected devices such as sensors, actuators, embedded micro-controllers, or smart appliances and the AWS Cloud. This enables you to collect telemetry data from multiple devices, and store and analyze the data. You can also create applications that enable your users to control these devices from their phones or tablets.
 In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send some information to the AWS IoT platform continuously. The information contains device ID, device type, device name, device status, air PM2.5 value, air quality. In AWS IoT platform, we will set some actions. First, we store the information in DynamoDB, Second, when PM2.5 value reach the harmful level, AWS IoT will send a message to tell the device to turn on the power. In the same time, we also can send an email to tell the user that air is dirty, we will open the device automatically. When air PM2.5 value back to normal level, IoT send a message to tell the device to turn off the device.
 
 
@@ -47,13 +47,13 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 2.5. In Apply a type to this thing section, select the type you create previously.
 
-2.6. Let other settings default, click **Next**.
+2.6. Let another settings default, click **Next**.
 
 2.7. In Add a certificate for your thing section, click **Create certificate**.
 
 ![3.png](/images/3.png)
 
-2.8. Download all the key file, and click **Activate**.
+2.8. Download all the key file and click **Activate**.
 
 2.9. Click **Attach a policy**.
 
@@ -343,7 +343,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 7.22. Type **＊** as attribute, type **device/aircleaner** as topic filter, type **pm=20 AND power = “ON”** as condition.
 
->please donot copy but type yourself on this condition **pm=20 AND power = “ON”**
+>please don’t copy but type yourself on this condition **pm=20 AND power = “ON”**
 
 7.23. Click Add action, click **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
@@ -381,7 +381,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 Congratulations! You now have learned how to:
 * How to register a device as a thing.
-* Using Rule Engine to trigger others AWS service.
+* Using Rule Engine to trigger other AWS service.
 * Using Shadow Engine to update device states.
 
 
