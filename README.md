@@ -4,9 +4,7 @@
 
 
 ## Scenario
-[AWS IoT] (https://aws.amazon.com/iot/) provides secure, bi-directional communication between Internet-connected devices such as sensors, actuators, embedded micro-controllers, or smart appliances and the AWS Cloud. This enables you to collect telemetry data from multiple devices, store and analyze the data. You can also create applications that enable your users to control these devices from their phones or tablets.
-In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send some information to the AWS IoT platform continuously. The information contains device ID, device type, device name, device status, air PM2.5 value, air quality. In AWS IoT platform, we will set some actions. First, we store the information in DynamoDB, Second, when PM2.5 value reach the harmful level, AWS IoT will send a message to tell the device to turn on the power. In the same time, we also can send an email to tell the user that air is dirty, we will open the device automatically. When air PM2.5 value back to normal level, IoT send a message to tell the device to turn off the device.
-
+[AWS IoT] (https://aws.amazon.com/iot/) provides secure, bi-directional communication between Internet-connected devices such as sensors, actuators, embedded micro-controllers, or smart appliances and the AWS Cloud. This enables you to collect telemetry data from multiple devices, store and analyze the data. You can also create applications that enable your users to control these devices from their phones or tablets. In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send some information to the AWS IoT platform continuously. The information contains device ID, device type, device name, device status, air PM2.5 value, air quality. In AWS IoT platform, we will set some actions. First, we store the information in DynamoDB, Second, when the PM2.5 value reaches the harmful level, AWS IoT will send a message to tell the device to turn on the power. In the same time, we also can send an email to tell the user that air is dirty, we will open the device automatically. When air PM2.5 value back to normal level, IoT send a message to tell the device to turn off the device.
 
 ![1.png](/images/1.png)
 
@@ -14,9 +12,9 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 ## Prerequisites
 >The workshop’s region will be in ‘N.Virginia’
 
-*	Sign-in a AWS account, and make sure you have select N.Virginia region. 
-* 	Download source file from github.
-*	Download MQTT.fx (1.6.0)：  http://mqttfx.jensd.de/index.php/download
+*    Sign-in an AWS account, and make sure you have select N.Virginia region. 
+*     Download source file from GitHub.
+*    Download MQTT.fx (1.6.0)：  http://mqttfx.jensd.de/index.php/download
 ![2.png](/images/2.png)
 
 
@@ -35,7 +33,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 1.6. Click **Create thing type**.
 
 
-### Create a IoT Thing.
+### Create an IoT Thing.
 
 2.1. Click **Things** under Manage at left navigation bar.
 
@@ -45,11 +43,11 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 2.4. Type **air_cleaner_demo** for the thing name.
 
-2.5. In Apply a type to this thing section, select the type you create previously.
+2.5. In applying a type to this thing section, select the type you create previously.
 
 2.6. Let another settings default, click **Next**.
 
-2.7. In Add a certificate for your thing section, click **Create certificate**.
+2.7. In add a certificate for your thing section, click **Create certificate**.
 
 ![3.png](/images/3.png)
 
@@ -66,7 +64,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 3.2. Click **Create a policy**.
 
-3.3. Type a name for policy.
+3.3. Type a name for the policy.
 
 3.4. In **Add Statements** section, type **iot:＊** in Action part, type **＊** in Resource ARN type.
 
@@ -113,7 +111,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 4.11. In **Client Certificate File**, choose the file name end with **.pem.crt**.
 
-4.12. In **Client Key File**, choose the file name end with **.pem.key**.
+4.12. In **Client Key File**, choose the filename end with **.pem.key**.
 
 4.13. Check **PEM Formatted**.
 
@@ -125,14 +123,14 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 4.16. Type **/test/topic** in the topic field, and copy below code and paste into the blank field:
 
-	{
-		"id": "12345678",
-		"type": "air_cleaner",
-		"name": "Demo",
-		"power": "OFF",
-		"pm": 1,
-		"quality": "Green"
-	}
+    {
+        "id": "12345678",
+        "type": "air_cleaner",
+        "name": "Demo",
+        "power": "OFF",
+        "pm": 1,
+        "quality": "Green"
+    }
 
 ![9.png](/images/9.png)
 
@@ -144,7 +142,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 ![10.png](/images/10.png)
 
-### Create a Rule to save message in DynamoDB
+### Create a Rule to save a message in DynamoDB
 
 5.1. In AWS IoT platform, click **Act** at left navigation bar.
 
@@ -191,7 +189,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 5.20. Go back to DynamoDB page, and you will see the message save in the table.
 
 
-### Send an Email when Air Quality reach threshold
+### Send an Email when Air Quality reach a threshold
 
 6.1. In AWS IoT Platform, click **Act**, then click **Create**.
 
@@ -211,33 +209,33 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 6.8. Select **Create a custom role**.
 
-6.9. Click **View policy document**, then click **Edit**, when warning pump out, click **OK**.
+6.9. Click **View policy document**, then click **Edit**, when warning pumps out, click **OK**.
 
-6.10. Copy below code and paste it to policy document, then click **Allow**.
+6.10. Copy below code and paste it into the policy document, then click **Allow**.
 
-	{
-  		"Version": "2012-10-17",
-  		"Statement": [
-    		{
-      			"Effect": "Allow",
-     			"Action": [
-        			"logs:CreateLogGroup",
-        			"logs:CreateLogStream",
-        			"logs:PutLogEvents"
-      			],
-      			"Resource": "arn:aws:logs:*:*:*"
-    		},
-    		{
-      			"Effect": "Allow",
-      			"Action": "sns:*",
-      			"Resource": "arn:aws:sns:*:*:*"
-    		}
-  		]
-	}
+    {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+                  "Effect": "Allow",
+                 "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "arn:aws:logs:*:*:*"
+            },
+            {
+                  "Effect": "Allow",
+                  "Action": "sns:*",
+                  "Resource": "arn:aws:sns:*:*:*"
+            }
+          ]
+    }
 
 6.11. Click **Create function**.
 
-6.12. Copy **air_quality_harmful.js** code, and paste it to Lambda code field.
+6.12. Copy **air_quality_harmful.js** code, and paste it into Lambda code field.
 
 6.13. In **Environment variables** section, type **email** as key, type your email as value, then click **Save**.
 
@@ -251,7 +249,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 ![14.png](/images/14.png)
 
-6.17. You will receive an email that contain device name, pm value, and air quality level.
+6.17. You will receive an email that contains device name, pm value, and air quality level.
 
 ### Use Rule to trigger Open and Shutdown Device
 
@@ -269,27 +267,27 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 7.7. Type **Lambda_send_mqtt** as Role name.
 
-7.8. Copy the below code and paste it to policy document, then click **Allow**.
+7.8. Copy the below code and paste it into the policy document, then click **Allow**.
 
-	{
-  		"Version": "2012-10-17",
-  		"Statement": [
-    		{
-      			"Effect": "Allow",
-      			"Action": [
-        			"logs:CreateLogGroup",
-        			"logs:CreateLogStream",
-        			"logs:PutLogEvents"
-      			],
-      			"Resource": "arn:aws:logs:*:*:*"
-    		},
-   			{
-      			"Effect": "Allow",
-      			"Action": "iot:*",
-      			"Resource": "arn:aws:iot:*:*:*"
-   			}
-		]
-	}
+    {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "arn:aws:logs:*:*:*"
+            },
+               {
+                  "Effect": "Allow",
+                  "Action": "iot:*",
+                  "Resource": "arn:aws:iot:*:*:*"
+               }
+        ]
+    }
     
 7.9. Copy the **deviceON.js** code and paste it to the Lambda code field, then save.
 
@@ -301,23 +299,23 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 7.12. Now Back to your IoT thing, click your thing, and click **Shadow**.
 
-7.13. You can see there is no shadow for device, so we need to create one.
+7.13. You can see there is no shadow for the device, so we need to create one.
 
 7.14. Back to MQTT.fx, type **$aws/things/air_cleaner_demo/shadow/update** as topic name.
 
-7.15. Copy below code and paste it to the field. This action is try to report the air cleaner current status to shadow engine.
+7.15. Copy below code and paste it into the field. This action tries to report the air cleaner current status to shadow engine.
 
-	{
-		"state": {
-			"reported": {
-				"power": "OFF"
-			}
-		}
-	}
+    {
+        "state": {
+            "reported": {
+                "power": "OFF"
+            }
+        }
+    }
 
 ![16.png](/images/16.png)
 
-7.16. Click **Publish**, then go back to IoT platform. You will see the shadow is change.
+7.16. Click **Publish**, then go back to the IoT platform. You will see the shadow changes.
 
 ![shadow.png](/images/shadow.png)
 
@@ -325,22 +323,22 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 7.18. Copy below code to MQTT.fx, and change the pm value to **50**, air quality to **RED**.
 
-	{
-		"id": "12345678",
-		"type": "air_cleaner",
-		"name": "Demo",
-		"power": "OFF",
-		"pm": 1,
-		"quality": "Green"
-	}
+    {
+        "id": "12345678",
+        "type": "air_cleaner",
+        "name": "Demo",
+        "power": "OFF",
+        "pm": 1,
+        "quality": "Green"
+    }
 
-7.19. Now **Publish** it, you should receive an warning email, and go back to see the thing shadow, it should have desire state.
+7.19. Now **Publish** it, you should receive a warning email, and go back to see the thing shadow, it should have the desired state.
 
 ![17.png](/images/17.png)
 
 7.20. Go back to **Act** page, then click **Create**.
 
-7.21. Type **Device_Auto_OFF** as name.
+7.21. Type **Device_Auto_OFF** as the name.
 
 7.22. Type **＊** as attribute, type **device/aircleaner** as topic filter, type **pm=20 AND power = “ON”** as condition.
 
@@ -366,17 +364,17 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 7.32. Back to MQTT.fx, type **device/aircleaner** and change the pm value to **20**, and air quality to **GREEN**, then **Publish**.
 
-7.33. You can go back the thing shadow to see the desire state is change to OFF.
+7.33. You can go back the thing shadow to see the desired state is changed to OFF.
 
 ![18.png](/images/18.png)
 
-### Use Scripts to test the all work flow
+### Use Scripts to test all workflow
 
 8.1. In MQTT.fx, click **Scripts**, then click **Edit**.
 
 8.2. Copy **air_cleaner_test.js** code and paste it to switch_fountain_test.js, save and close it.
 
-8.3. Now you can click **Execute** to see how shadow change, and the workflow. The scripts will let MQTT.fx send message every second.
+8.3. Now you can click **Execute** to see how shadow change, and the workflow. The scripts will let MQTT.fx send a message every second.
 
 ## Conclusion
 
