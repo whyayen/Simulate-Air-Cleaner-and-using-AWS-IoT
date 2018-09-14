@@ -109,7 +109,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 4.9. Select **SSL/TLS**, select **Enable SSL/TLS**, then select **Self signed certificates**.
 
-4.10. In **CA File**, choose the file name end with **.pem.txt**.
+4.10. In **CA File**, choose [**the CA file**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/myIoT_CA.pem.txt) name end with **.pem.txt**.
 
 4.11. In **Client Certificate File**, choose the file name end with **.pem.crt**.
 
