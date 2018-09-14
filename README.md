@@ -59,6 +59,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 2.10. Click **Register thing**.
 
+
 ### Create a Secure Policy and Attach on Certificate
 
 3.1. Click **Secure** and click **Policies** at left navigation bar.
@@ -206,7 +207,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 6.6. Click **Create a new Lambda function**.
 
-6.7. Type **Air_warning** as Lambda name.
+6.7. Type **Airwarning** as Lambda name.
 
 6.8. Select **Create a custom role**.
 
@@ -240,13 +241,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 6.13. In **Environment variables** section, type **email** as key, type your email as value, then click **Save**.
 
-6.14. Back to IoT rule create page, click reload and select **
-
-
-
-
-
-**, then click **Add action**.
+6.14. Back to IoT rule create page, click reload and select **Airwarning**, then click **Add action**.
 
 ![13.png](/images/13.png)
 
