@@ -346,7 +346,7 @@
 
 7.23. Click Add action, click **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
-7.24. Click **Create a new resource**.
+7.24. Click **Create a new lambda function**.
 
 7.25. Type **ShutdownDevice** as name.
 
