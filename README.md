@@ -257,7 +257,7 @@
 
 7.2. Click **Add action**, then click **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
-7.3. Click **Create a new resource**.
+7.3. Click **Create a new lambda function**.
 
 7.4. Type **OpenDevice** as Lambda name.
 
@@ -267,7 +267,7 @@
 
 7.7. Type **Lambda_send_mqtt** as Role name.
 
-7.8. Copy the below code and paste it into the policy document, then click **Allow**.
+7.8. Back to lambda function, then copy the below code and paste it into the policy document, then click **Allow**.
 
     {
           "Version": "2012-10-17",
@@ -291,7 +291,7 @@
     
 7.9. Copy the **deviceON.js** code and paste it to the Lambda code field, then save.
 
-7.10. Remember to change your endpoint.
+7.10. Remember to change your endpoint and click save.
 
 ![15.png](/images/15.png)
 
