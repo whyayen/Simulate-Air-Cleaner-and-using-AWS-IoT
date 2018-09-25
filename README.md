@@ -51,7 +51,7 @@
 
 ![3.png](/images/3.png)
 
-2.8. Download all the key file and click **Activate**.
+2.8. Download "all" the key file and click **Activate**.
 
 2.9. Click **Attach a policy**.
 
@@ -107,7 +107,7 @@
 
 4.9. Select **SSL/TLS**, select **Enable SSL/TLS**, then select **Self signed certificates**.
 
-4.10. In **CA File**, choose [**the CA file**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/myIoT_CA.pem.txt) name end with **.pem.txt**.
+4.10. In **CA File**, choose [**the CA file**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/myIoT_CA.pem.txt) name end with **.pem.txt**. After downloading it, save the file name end with **.pem**. 
 
 4.11. In **Client Certificate File**, choose the file name end with **.pem.crt**.
 
@@ -362,7 +362,7 @@
 
 7.31. Click **Create rule**.
 
-7.32. Back to MQTT.fx, type **device/aircleaner** and change the pm value to **20**, and air quality to **GREEN**, then **Publish**.
+7.32. Back to MQTT.fx, type **device/aircleaner** and change the pm value to **20**, power to **ON**, and air quality to **GREEN**, then **Publish**.
 
 7.33. You can go back the thing shadow to see the desired state is changed to OFF.
 
@@ -370,9 +370,9 @@
 
 ### Use Scripts to test all workflow
 
-8.1. In MQTT.fx, click **Scripts**, then click **Edit**.
+8.1. In MQTT.fx, click **Scripts**.
 
-8.2. Copy **air_cleaner_test.js** code and paste it to switch_fountain_test.js, save and close it.
+8.2. Copy [**air_cleaner_test.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/Air_cleaner_test.js) code and paste it to switch_fountain_test.js, save and close it.
 
 8.3. Now you can click **Execute** to see how shadow change, and the workflow. The scripts will let MQTT.fx send a message every second.
 
