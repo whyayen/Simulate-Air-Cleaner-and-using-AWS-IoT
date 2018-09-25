@@ -184,7 +184,7 @@
 
 5.18. Go back MQTT.fx, type **device/aircleaner** as topic name.
 
-5.19. Copy the [**Air_cleaner_test.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/Air_cleaner_test.js) code and paste to MQTT.fx, then click **Publish**.
+5.19. Copy the [**air_cleanr.json**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_cleaner.json) code and paste to MQTT.fx, then click **Publish**.
 
 5.20. Go back to DynamoDB page, and you will see the message save in the table.
 
