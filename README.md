@@ -148,45 +148,44 @@
 
 5.2. Click **Create a rule**.
 
-5.3. Type **Save_in_DynamoDB** as name.
+5.3. Type **Save_in_DynamoDB** as name and description.
 
-5.4. Type **＊** in Attribute at Message source.
-
-5.5. Type **device/aircleaner** in Topic filter.
-
-5.6. Let condition blank, click **Add action**.
+5.4. Type the following SQL script into **Rule query statement**:
+```
+SELECT * FROM 'device/aircleaner'
+```
 
 ![5_6_create_rule.png](/images/5_6_create_rule.png)
 
-5.7. Select **Insert a message into a DynamoDB table**, then click **Configure action**.
+5.5. Select **Insert a message into a DynamoDB table**, then click **Configure action**.
 
-5.8. Click **Create a new resource**.
+5.6. Click **Create a new resource**.
 
-5.9. Click **Create table**.
+5.7. Click **Create table**.
 
-5.10. Type **air_cleaner_message** as Table name.
+5.8. Type **air_cleaner_message** as Table name.
 
-5.11. Type **device_id** as Partition key, then click **Create**.
+5.9. Type **device_id** as Partition key, then click **Create**.
 
-5.12. Back to IoT rule create page, click reload and choose **air_cleaner_message**.
+5.10. Back to IoT rule create page, click reload and choose **air_cleaner_message**.
 
-5.13. Type **$id** as Hash key value.
+5.11. Type **$id** as Hash key value.
 
-5.14. Click **Create a new role**.
+5.12. Click **Create a new role**.
 
-5.15. Type **IoT_save_DynamoDB** as role name, then click **Create a new role**.
+5.13. Type **IoT_save_DynamoDB** as role name, then click **Create a new role**.
 
-5.16. Select the **IoT_save_DynamoDB** role, and click **Add action**. 
+5.14. Select the **IoT_save_DynamoDB** role, and click **Add action**. 
 
 ![configure_action.png](/images/configure_action.png)
 
-5.17. Click **Create rule**.
+5.15. Click **Create rule**.
 
-5.18. Go back MQTT.fx, type **device/aircleaner** as topic name.
+5.16. Go back MQTT.fx, type **device/aircleaner** as topic name.
 
-5.19. Copy the [**air_cleanr.json**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_cleaner.json) code and paste to MQTT.fx, then click **Publish**.
+5.17. Copy the [**air_cleanr.json**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_cleaner.json) code and paste to MQTT.fx, then click **Publish**.
 
-5.20. Go back to DynamoDB page, and you will see the message save in the table.
+5.18. Go back to DynamoDB page, and you will see the message save in the table.
 
 
 ### Send an Email when Air Quality reach a threshold
