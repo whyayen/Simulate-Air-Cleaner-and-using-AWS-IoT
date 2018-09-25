@@ -1,0 +1,8 @@
+{
+	"id": "12345678",
+	"type": "air_cleaner",
+	"name": "Demo",
+	"power": "OFF",
+	"pm": 1,
+	"quality": "Green"
+}
