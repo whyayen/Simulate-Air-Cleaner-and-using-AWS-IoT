@@ -156,7 +156,7 @@
 
 5.6. Let condition blank, click **Add action**.
 
-![11.png](/images/11.png)
+![5_6_create_rule.PNG](/images/5_6_create_rule.PNG)
 
 5.7. Select **Insert a message into a DynamoDB table**, then click **Configure action**.
 
@@ -197,7 +197,7 @@
 
 6.3. Type **＊** in attribute, type **device/aircleaner** in topic filter, type **pm=50** in condition.
 
-![12.png](/images/12.png)
+![6_3_send_warning_email.PNG](/images/6_3_send_warning_email.PNG)
 
 6.4. Click **Add action** in set one or more actions.
 
