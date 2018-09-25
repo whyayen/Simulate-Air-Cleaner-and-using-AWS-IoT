@@ -156,7 +156,7 @@
 
 5.6. Let condition blank, click **Add action**.
 
-![5_6_create_rule.PNG](/images/5_6_create_rule.PNG)
+![5_6_create_rule.png](/images/5_6_create_rule.png)
 
 5.7. Select **Insert a message into a DynamoDB table**, then click **Configure action**.
 
@@ -195,8 +195,10 @@
 
 6.2. Type **send_warning_email** as name.
 
-6.3. Type **＊** in attribute, type **device/aircleaner** in topic filter, type **pm=50** in condition.
-
+6.3. Type the following SQL script into **Rule query statement**:
+```
+SELECT * FROM 'device/aircleaner' WHERE pm = 50
+```
 ![6_3_send_warning_email.PNG](/images/6_3_send_warning_email.PNG)
 
 6.4. Click **Add action** in set one or more actions.
@@ -235,7 +237,7 @@
 
 6.11. Click **Create function**.
 
-6.12. Copy **air_quality_harmful.js** code, and paste it into Lambda code field.
+6.12. Copy [**air_quality_harmful.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_quality_harmful.js) code, and paste it into Lambda code field.
 
 6.13. In **Environment variables** section, type **email** as key, type your email as value, then click **Save**.
 
@@ -289,7 +291,7 @@
         ]
     }
     
-7.9. Copy the **deviceON.js** code and paste it to the Lambda code field, then save.
+7.9. Copy the [**deviceON.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceON.js) code and paste it to the Lambda code field, then save.
 
 7.10. Remember to change your endpoint and click save.
 
@@ -340,10 +342,10 @@
 
 7.21. Type **Device_Auto_OFF** as the name.
 
-7.22. Type **＊** as attribute, type **device/aircleaner** as topic filter, type **pm=20 AND power = “ON”** as condition.
-
->please don’t copy but type yourself on this condition **pm=20 AND power = “ON”**
-
+7.22. Type the following SQL script into **Rule query statement**:
+```
+SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
+```
 7.23. Click Add action, click **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
 7.24. Click **Create a new lambda function**.
@@ -354,7 +356,7 @@
 
 7.27. Select **Lambda_send_mqtt** as Existing role, then Click Create function.
 
-7.28. Copy the **deviceOFF.js** code and paste it to the Lambda code field.
+7.28. Copy the [**deviceOFF.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceOFF.js) code and paste it to the Lambda code field.
 
 7.29. Remember to change your endpoint.
 
@@ -370,7 +372,7 @@
 
 ### Use Scripts to test all workflow
 
-8.1. In MQTT.fx, click **Scripts**.
+8.1. In MQTT.fx, click **Scripts** then click **Edit**.
 
 8.2. Copy [**air_cleaner_test.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/Air_cleaner_test.js) code and paste it to switch_fountain_test.js, save and close it.
 
