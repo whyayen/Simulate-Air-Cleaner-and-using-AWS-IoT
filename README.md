@@ -13,7 +13,7 @@
 >The workshop’s region will be in ‘N.Virginia’
 
 *    Sign-in an AWS account, and make sure you have select N.Virginia region. 
-*     Download source file from GitHub.
+*    Download source file from GitHub.
 *    Download MQTT.fx (1.6.0)：  http://mqttfx.jensd.de/index.php/download
 ![2.png](/images/2.png)
 
@@ -37,13 +37,13 @@
 
 2.1. Click **Things** under Manage at left navigation bar.
 
-2.2. Click **Create**.
+2.2. Click **Register a thing**.
 
 2.3. Click **Create a single thing**.
 
 2.4. Type **air_cleaner_demo** for the thing name.
 
-2.5. In applying a type to this thing section, select the type you create previously.
+2.5. In applying a type to this thing type section, select the type you create previously.
 
 2.6. Let another settings default, click **Next**.
 
@@ -150,42 +150,43 @@
 
 5.3. Type **Save_in_DynamoDB** as name and description.
 
-5.4. Type the following SQL script into **Rule query statement**:
+5.4. Copy and paste the following SQL script into **Rule query statement**:
 ```
 SELECT * FROM 'device/aircleaner'
 ```
+5.5. Click **Add action** in set one or more actions. 
 
 ![5_6_create_rule.png](/images/5_6_create_rule.png)
 
-5.5. Select **Insert a message into a DynamoDB table**, then click **Configure action**.
+5.6. Select **Insert a message into a DynamoDB table**, then click **Configure action**.
 
-5.6. Click **Create a new resource**.
+5.7. Click **Create a new resource**.
 
-5.7. Click **Create table**.
+5.8. Click **Create table**.
 
-5.8. Type **air_cleaner_message** as Table name.
+5.9. Type **air_cleaner_message** as Table name.
 
-5.9. Type **device_id** as Partition key, then click **Create**.
+5.10. Type **device_id** as Partition key, then click **Create**.
 
-5.10. Back to IoT rule create page, click reload and choose **air_cleaner_message**.
+5.11. Back to IoT rule create page, click reload and choose **air_cleaner_message**.
 
-5.11. Type **$id** as Hash key value.
+5.12. Type **$id** as Hash key value.
 
-5.12. Click **Create a new role**.
+5.13. Click **Create a new role**.
 
-5.13. Type **IoT_save_DynamoDB** as role name, then click **Create a new role**.
+5.14. Type **IoT_save_DynamoDB** as role name, then click **Create a new role**.
 
-5.14. Select the **IoT_save_DynamoDB** role, and click **Add action**. 
+5.15. Select the **IoT_save_DynamoDB** role, and click **Add action**. 
 
 ![configure_action.png](/images/configure_action.png)
 
-5.15. Click **Create rule**.
+5.16. Click **Create rule**.
 
-5.16. Go back MQTT.fx, type **device/aircleaner** as topic name.
+5.17. Go back MQTT.fx, type **device/aircleaner** as topic name.
 
-5.17. Copy the [**air_cleanr.json**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_cleaner.json) code and paste to MQTT.fx, then click **Publish**.
+5.18. Copy the [**air_cleanr.json**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_cleaner.json) code and paste to MQTT.fx, then click **Publish**.
 
-5.18. Go back to DynamoDB page, and you will see the message save in the table.
+5.19. Go back to DynamoDB page, and you will see the message save in the table.
 
 
 ### Send an Email when Air Quality reach a threshold
@@ -240,7 +241,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 6.13. In **Environment variables** section, type **email** as key, type your email as value, then click **Save**.
 
-6.14. Back to IoT rule create page, click reload and select **Airwarning**, then click **Add action**.
+6.14. Back to IoT rule create page, click refresh and select **Airwarning**, then click **Add action**.
 
 ![13.png](/images/13.png)
 
@@ -290,13 +291,13 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
         ]
     }
     
-7.9. Copy the [**deviceON.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceON.js) code and paste it to the Lambda code field, then save.
+7.9. After creating the lambda function, copy the [**deviceON.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceON.js) code and paste it to the Lambda code field, then save.
 
-7.10. Remember to change your endpoint and click save.
+7.10. Remember to change your endpoint the same as Broker address in MQTT.fx and click save.
 
 ![15.png](/images/15.png)
 
-7.11. Back to Rule creation page, click reload and select **OpenDevice**, then click **Add action**.
+7.11. Back to Rule creation page, click refresh and select **OpenDevice**, then click **Add action**.
 
 7.12. Now Back to your IoT thing, click your thing, and click **Shadow**.
 
@@ -353,7 +354,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
 
 7.26. Select **Choose an existing role** as Role.
 
-7.27. Select **Lambda_send_mqtt** as Existing role, then Click Create function.
+7.27. Select **Lambda_send_mqtt** as Existing role, then Click **Create function**.
 
 7.28. Copy the [**deviceOFF.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceOFF.js) code and paste it to the Lambda code field.
 
