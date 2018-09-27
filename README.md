@@ -154,9 +154,9 @@
 ```
 SELECT * FROM 'device/aircleaner'
 ```
-5.5. Click **Add action** in set one or more actions. 
-
 ![5_6_create_rule.png](/images/5_6_create_rule.png)
+
+5.5. Click **Add action** in set one or more actions. 
 
 5.6. Select **Insert a message into a DynamoDB table**, then click **Configure action**.
 
