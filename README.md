@@ -4,9 +4,9 @@
 
 
 ## Scenario
-[AWS IoT] (https://aws.amazon.com/iot/) provides secure, bi-directional communication between Internet-connected devices such as sensors, actuators, embedded micro-controllers, or smart appliances and the AWS Cloud. This enables you to collect telemetry data from multiple devices, store and analyze the data. You can also create applications that enable your users to control these devices from their phones or tablets. In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send some information to the AWS IoT platform continuously. The information contains device ID, device type, device name, device status, air PM2.5 value, air quality. In AWS IoT platform, we will set some actions. First, we store the information in DynamoDB, Second, when the PM2.5 value reaches the harmful level, AWS IoT will send a message to tell the device to turn on the power. In the same time, we also can send an email to tell the user that air is dirty, we will open the device automatically. When air PM2.5 value back to normal level, IoT send a message to tell the device to turn off the device.
+[AWS IoT](https://aws.amazon.com/iot/) provides secure, bi-directional communication between Internet-connected devices such as sensors, actuators, embedded micro-controllers, or smart appliances and the AWS Cloud. This enables you to collect telemetry data from multiple devices, store and analyze the data. You can also create applications that enable your users to control these devices from their phones or tablets. In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send some information to the AWS IoT platform continuously. The information contains device ID, device type, device name, device status, air PM2.5 value, air quality. In AWS IoT platform, we will set some actions. First, we store the information in DynamoDB, Second, when the PM2.5 value reaches the harmful level, AWS IoT will send a message to tell the device to turn on the power. In the same time, we also can send an email to tell the user that air is dirty, we will open the device automatically. When air PM2.5 value back to normal level, IoT send a message to tell the device to turn off the device.
 
-![1.png](/images/1.png)
+![1.png](images/1.png)
 
 
 ## Prerequisites
@@ -15,7 +15,7 @@
 *    Sign-in an AWS account, and make sure you have select N.Virginia region. 
 *    Download source file from GitHub.
 *    Download MQTT.fx (1.6.0)：  http://mqttfx.jensd.de/index.php/download
-![2.png](/images/2.png)
+![2.png](images/2.png)
 
 
 ## Lab tutorial
@@ -49,13 +49,23 @@
 
 2.7. In add a certificate for your thing section, click **Create certificate**.
 
-![3.png](/images/3.png)
+![3.png](images/3.png)
 
-2.8. Download "all" the key file and click **Activate**.
+2.8. **Download** the following file and click **Activate**.
 
-2.9. Click **Attach a policy**.
+![key.png](images/key.png)
 
-2.10. Click **Register thing**.
+2.9. As shown in the figure below, click **Download**. A website will pop out.
+
+![CA.png](images/CA.png)
+
+2.10. In the popping website, click **Amazon Root CA 1** to download root CA certificate.
+
+![CA2.png](images/CA2.png)
+
+2.11. Click **Attach a policy**.
+
+2.12. Click **Register thing**.
 
 
 ### Create a Secure Policy and Attach on Certificate
@@ -66,9 +76,9 @@
 
 3.3. Type a name for the policy.
 
-3.4. In **Add Statements** section, type **iot:＊** in Action part, type **＊** in Resource ARN type.
+3.4. In **Add Statements** section, type __`iot:*`__ in Action part, type __`*`__ in Resource ARN type.
 
-![4.png](/images/4.png)
+![4.png](images/4.png)
 
 3.5. Check **Allow**, then click **Create**.
 
@@ -76,7 +86,7 @@
 
 3.7. Click the Certificate you create previously.
 
-![5.png](/images/5.png)
+![5.png](images/5.png)
 
 3.8. Click **Actions**, then click **Attach policy**.
 
@@ -89,7 +99,7 @@
 
 4.2. Click the gear.
 
-![6.png](/images/6.png)
+![6.png](images/6.png)
 
 4.3. Type a name for **Profile name**.
 
@@ -97,7 +107,7 @@
 
 4.5. Copy the endpoint.
 
-![7.png](/images/7.png)
+![7.png](images/7.png)
 
 4.6. Back to MQTT.fx, paste it to **Broker address**.
 
@@ -115,7 +125,7 @@
 
 4.13. Check **PEM Formatted**.
 
-![8.png](/images/8.png)
+![8.png](images/8.png)
 
 4.14. Click **Apply** then click **OK**.
 
@@ -132,7 +142,7 @@
         "quality": "Green"
     }
 
-![9.png](/images/9.png)
+![9.png](images/9.png)
 
 4.17. Back to AWS IoT platform, click **Test** at left navigation bar.
 
@@ -140,7 +150,7 @@
 
 4.19. Back to MQTT.fx, then click Publish, and you will see the message on the AWS IoT Platform
 
-![10.png](/images/10.png)
+![10.png](images/10.png)
 
 ### Create a Rule to save a message in DynamoDB
 
@@ -154,7 +164,7 @@
 ```
 SELECT * FROM 'device/aircleaner'
 ```
-![5_6_create_rule.png](/images/5_6_create_rule.png)
+![5_6_create_rule.png](images/5_6_create_rule.png)
 
 5.5. Click **Add action** in set one or more actions. 
 
@@ -178,7 +188,7 @@ SELECT * FROM 'device/aircleaner'
 
 5.15. Select the **IoT_save_DynamoDB** role, and click **Add action**. 
 
-![configure_action.png](/images/configure_action.png)
+![configure_action.png](images/configure_action.png)
 
 5.16. Click **Create rule**.
 
@@ -199,7 +209,7 @@ SELECT * FROM 'device/aircleaner'
 ```
 SELECT * FROM 'device/aircleaner' WHERE pm = 50
 ```
-![6_3_send_warning_email.PNG](/images/6_3_send_warning_email.PNG)
+![6_3_send_warning_email.PNG](images/6_3_send_warning_email.PNG)
 
 6.4. Click **Add action** in set one or more actions.
 
@@ -243,13 +253,13 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 6.14. Back to IoT rule create page, click refresh and select **Airwarning**, then click **Add action**.
 
-![13.png](/images/13.png)
+![13.png](images/13.png)
 
 6.15. Click **Create rule**.
 
 6.16. Go to MQTT.fx, set pm value as **50**, and set quality as **RED**, then click **Publish**.
 
-![14.png](/images/14.png)
+![14.png](images/14.png)
 
 6.17. You will receive an email that contains device name, pm value, and air quality level.
 
@@ -295,7 +305,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 7.10. Remember to change your endpoint the same as Broker address in MQTT.fx and click save.
 
-![15.png](/images/15.png)
+![15.png](images/15.png)
 
 7.11. Back to Rule creation page, click refresh and select **OpenDevice**, then click **Add action**.
 
@@ -315,11 +325,11 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
         }
     }
 
-![16.png](/images/16.png)
+![16.png](images/16.png)
 
 7.16. Click **Publish**, then go back to the IoT platform. You will see the shadow changes.
 
-![shadow.png](/images/shadow.png)
+![shadow.png](images/shadow.png)
 
 7.17. Now let try to trigger the rule to open device automatically. Go back MQTT.fx, type **device/aircleaner**.
 
@@ -336,7 +346,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 7.19. Now **Publish** it, you should receive a warning email, and go back to see the thing shadow, it should have the desired state.
 
-![17.png](/images/17.png)
+![17.png](images/17.png)
 
 7.20. Go back to **Act** page, then click **Create**.
 
@@ -368,7 +378,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
 
 7.33. You can go back the thing shadow to see the desired state is changed to OFF.
 
-![18.png](/images/18.png)
+![18.png](images/18.png)
 
 ### Use Scripts to test all workflow
 
