@@ -55,15 +55,15 @@
 
 ![key.png](images/key.png)
 
-2.9. As shown in the figure below, click **Download**. A website will pop out.
+2.9. As shown in the figure below, click **Download**. Meanwhile, a web page will pop out.
 
 ![CA.png](images/CA.png)
 
-2.10. In the popping website, click **Amazon Root CA 1** to download root CA certificate.
+2.10. In the popping web page, click **Amazon Root CA 1** to download root CA certificate. After downloading, you can close this web page.
 
 ![CA2.png](images/CA2.png)
 
-2.11. Click **Attach a policy**.
+2.11. Back to **Create A Thing** page and click **Attach a policy**.
 
 2.12. Click **Register thing**.
 
