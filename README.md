@@ -3,8 +3,11 @@
 
 
 
+
+[AWS IoT](https://aws.amazon.com/iot/) provides secure, bi-directional communication between Internet-connected devices such as sensors, actuators, embedded micro-controllers, or smart appliances and the AWS Cloud. This enables you to collect telemetry data from multiple devices, store and analyze the data. You can also create applications that enable your users to control these devices from their phones or tablets. 
+
 ## Scenario
-[AWS IoT](https://aws.amazon.com/iot/) provides secure, bi-directional communication between Internet-connected devices such as sensors, actuators, embedded micro-controllers, or smart appliances and the AWS Cloud. This enables you to collect telemetry data from multiple devices, store and analyze the data. You can also create applications that enable your users to control these devices from their phones or tablets. In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send some information to the AWS IoT platform continuously. The information contains device ID, device type, device name, device status, air PM2.5 value, air quality. In AWS IoT platform, we will set some actions. First, we store the information in DynamoDB, Second, when the PM2.5 value reaches the harmful level, AWS IoT will send a message to tell the device to turn on the power. In the same time, we also can send an email to tell the user that air is dirty, we will open the device automatically. When air PM2.5 value back to normal level, IoT send a message to tell the device to turn off the device.
+In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send some information such as power status to the AWS IoT platform. The information contains device ID, device type, device name, device status, air PM2.5 value, air quality. In AWS IoT platform, we will set some actions. First, we store the information in DynamoDB, second, when the PM2.5 value reaches the harmful level, AWS IoT will send a message to tell the device to turn on the power. In the same time, we also can send an email to tell the user that air is dirty, we will open the device automatically. When air PM2.5 value back to normal level, IoT send a message to tell the device to turn off the device.
 
 ![1.png](images/1.png)
 
@@ -19,7 +22,7 @@
 
 
 ## Lab tutorial
-### Create a IoT Type
+### Create an IoT Type
 1.1. Open AWS Manage Console and Sign in.
 
 1.2. Click **IoT Device Management** under service.
@@ -43,6 +46,8 @@
 
 2.4. Type **air_cleaner_demo** for the thing name.
 
+> Note: Make sure the thing name is correct because the following examples are based on this thing name.
+
 2.5. In applying a type to this thing type section, select the type you create previously.
 
 2.6. Let another settings default, click **Next**.
@@ -59,11 +64,11 @@
 
 ![CA.png](images/CA.png)
 
-2.10. In the popping web page, click **Amazon Root CA 1** to download root CA certificate. After downloading, you can close this web page.
+2.10. In the popping web page, **right-click** **`Amazon Root CA 1`** -> **Save as a new file** to download root CA certificate. After downloading, you can close this web page.
 
 ![CA2.png](images/CA2.png)
 
-2.11. Back to **Create A Thing** page and click **Attach a policy**.
+2.11. Back to **Create a Thing** page and click **Attach a policy**.
 
 2.12. Click **Register thing**.
 
@@ -105,7 +110,8 @@
 
 4.4. Go back to IoT thing, click the thing you create previously, then click **Interact**.
 
-4.5. Copy the endpoint.
+4.5. Copy the **endpoint**.
+> Note: You can write down or copy the endpoint to a text file because it will be used in step 7.10.
 
 ![7.png](images/7.png)
 
@@ -117,11 +123,11 @@
 
 4.9. Select **SSL/TLS**, select **Enable SSL/TLS**, then select **Self signed certificates**.
 
-4.10. In **CA File**, choose [**the CA file**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/myIoT_CA.pem.txt) name end with **.pem.txt**. After downloading it, save the file name end with **.pem**. 
+4.10. In **CA File**, choose **the CA file** which is a **.pem** file.
 
-4.11. In **Client Certificate File**, choose the file name end with **.pem.crt**.
+4.11. In **Client Certificate File**, choose the file which is a **.pem.crt** file.
 
-4.12. In **Client Key File**, choose the filename end with **.pem.key**.
+4.12. In **Client Key File**, choose the file named with **private.pem.key** suffix.
 
 4.13. Check **PEM Formatted**.
 
@@ -148,11 +154,11 @@
 
 4.18. Type **/test/topic** in Subscription topic field, then click **Subscribe to topic**
 
-4.19. Back to MQTT.fx, then click Publish, and you will see the message on the AWS IoT Platform
+4.19. Back to MQTT.fx, then click Publish, and you will see the message on the AWS IoT Platform.
 
 ![10.png](images/10.png)
 
-### Create a Rule to save a message in DynamoDB
+### Create a Rule to Save a Message in DynamoDB
 
 5.1. In AWS IoT platform, click **Act** at left navigation bar.
 
@@ -303,7 +309,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
     
 7.9. After creating the lambda function, copy the [**deviceON.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceON.js) code and paste it to the Lambda code field, then save.
 
-7.10. Remember to change your endpoint the same as Broker address in MQTT.fx and click save.
+7.10. Remember to **replace your endpoint** with the **end point** in **step 4.5** and click save.
 
 ![15.png](images/15.png)
 
