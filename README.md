@@ -443,24 +443,11 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
 
 ## Clean Up
 
-     AWS Iot
-      Thing : air_cleaner_demo
-      Thing Type 
-      Certificates
-      Policies
-      Act Rules
-
-     Lambda Functions
-      Airwarning
-      OpenDevice
-      ShutdownDevice
-
-     AWS IAM Roles
-      IoT_save_DynamoDB
-      Lambda_send_mqtt
-
-     AWS DynamoDB
-      air_cleaner_message table 
+To delete the AWS resources, perform the tasks below in order:
+* Delete Thing, Thing Type, Certificates, Policies, and Act Roles in AWS Iot.
+* Delete "Airwarning", "OpenDevice", "ShutdownDevice" functions in Lambda Functions.
+* Delete AWS IAM Roles "IoT_save_DynamoDB" and "Lambda_send_mqtt".
+* Delete "air_cleaner_message" table in AWS DYnamoDB.
 
 ## Conclusion
 
