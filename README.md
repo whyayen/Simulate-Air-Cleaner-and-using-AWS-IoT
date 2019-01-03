@@ -442,7 +442,25 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
 3. Now you can click **Execute** to see how shadow change, and the workflow. The scripts will let MQTT.fx send a message every second.
 
 ## Clean Up
-   Aws Iot, Lambda, IAM, DynamoDB 
+
+     AWS Iot
+      Thing : air_cleaner_demo
+      Thing Type 
+      Certificates
+      Policies
+      Act Rules
+
+     Lambda Functions
+      Airwarning
+      OpenDevice
+      ShutdownDevice
+
+     AWS IAM
+      IoT_save_DynamoDB
+      Lambda_send_mqtt
+
+     AWS DynamoDB
+      air_cleaner_message table 
 
 ## Conclusion
 
