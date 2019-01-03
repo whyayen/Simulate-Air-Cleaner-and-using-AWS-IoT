@@ -455,7 +455,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
       OpenDevice
       ShutdownDevice
 
-     AWS IAM
+     AWS IAM Roles
       IoT_save_DynamoDB
       Lambda_send_mqtt
 
