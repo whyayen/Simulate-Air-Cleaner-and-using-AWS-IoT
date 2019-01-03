@@ -447,7 +447,7 @@ To delete the AWS resources, perform the tasks below in order:
 * Delete Thing, Thing Type, Certificates, Policies, and Act Roles in AWS Iot.
 * Delete "Airwarning", "OpenDevice", "ShutdownDevice" functions in Lambda Functions.
 * Delete AWS IAM Roles "IoT_save_DynamoDB" and "Lambda_send_mqtt".
-* Delete "air_cleaner_message" table in AWS DYnamoDB.
+* Delete "air_cleaner_message" table in AWS DynamoDB.
 
 ## Conclusion
 
