@@ -20,6 +20,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 *    Sign-in an AWS account, and make sure you have select N.Virginia region. 
 *    Download source file from GitHub.
 *    Download MQTT.fx (1.6.0)：  http://mqttfx.jensd.de/index.php/download
+
 <p align="center">
     <img src="images/2.png" width="70%" height="70%">
 </p>
@@ -62,22 +63,22 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
     <img src="images/3.png" width="70%" height="70%">
 </p>
 
-8. **Download** the following file and click **Activate**.
-
-<p align="center">
-    <img src="images/key.png" width="70%" height="70%">
-</p>
-
-9. As shown in the figure below, click **Download**. Meanwhile, a web page will pop out.
+8. As shown in the figure below, click **Download**. Meanwhile, a web page will pop out.
 
 <p align="center">
     <img src="images/CA.png" width="70%" height="70%">
 </p>
 
-10. In the popping web page, **right-click** **`Amazon Root CA 1`** -> **Save as a new file** to download root CA certificate. After downloading, you can close this web page.
+9. In the popping web page, **right-click** **`Amazon Root CA 1`** -> **Save as a new file** to download root CA certificate. After downloading, you can close this web page.
 
 <p align="center">
     <img src="images/CA2.png" width="70%" height="70%">
+</p>
+
+10. **Download** the following file and click **Activate**.
+
+<p align="center">
+    <img src="images/key.png" width="70%" height="70%">
 </p>
 
 11. Back to **Create a Thing** page and click **Attach a policy**.
@@ -161,6 +162,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 16. Type **/test/topic** in the topic field, and copy below code and paste into the blank field:
 
+```
     {
         "id": "12345678",
         "type": "air_cleaner",
@@ -169,6 +171,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
         "pm": 1,
         "quality": "Green"
     }
+```
 
 <p align="center">
     <img src="images/9.png" width="70%" height="70%">
@@ -194,7 +197,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 4. Copy and paste the following SQL script into **Rule query statement**:
 ```
-SELECT * FROM 'device/aircleaner'
+SELECT * FROM 'device/<your-thing-name>'
 ```
 <p align="center">
     <img src="images/5_6_create_rule.png" width="70%" height="70%">
@@ -214,7 +217,7 @@ SELECT * FROM 'device/aircleaner'
 
 11. Back to IoT rule create page, click reload and choose **air_cleaner_message**.
 
-12. Type **$id** as Hash key value.
+12. Type **$id** as Partition key value.
 
 13. Click **Create a new role**.
 
@@ -226,12 +229,11 @@ SELECT * FROM 'device/aircleaner'
     <img src="images/configure_action.png" width="70%" height="70%">
 </p>
 
+16. Click **Create rule**.
 
-16. Go back MQTT.fx, type **device/aircleaner** as topic name.
+17. Go back MQTT.fx, type **device/<your_thing_name>** as topic name.
 
-17. Copy the [**air_cleanr.json**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_cleaner.json) code and paste to MQTT.fx, then click **Publish**.
-
-18. Click **Create rule**.
+18. Copy the [**air_cleaner.json**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_cleaner.json) code and paste to MQTT.fx, then click **Publish**.
 
 19. Go back to DynamoDB page, and you will see the message save in the table.
 
@@ -243,11 +245,13 @@ SELECT * FROM 'device/aircleaner'
 2. Type **send_warning_email** as name.
 
 3. Type the following SQL script into **Rule query statement**:
+
 ```
-SELECT * FROM 'device/aircleaner' WHERE pm = 50
+SELECT * FROM 'device/<your-thing-name>' WHERE pm = 50
 ```
+
 <p align="center">
-    <img src="images/6_3_send_warning_email.png" width="70%" height="70%">
+    <img src="images/6_3_send_warning_email.PNG" width="70%" height="70%">
 </p>
 
 4. Click **Add action** in set one or more actions.
@@ -264,6 +268,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 10. Copy below code and paste it into the policy document, then click **Allow**.
 
+```
     {
           "Version": "2012-10-17",
           "Statement": [
@@ -283,6 +288,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
             }
           ]
     }
+```
 
 11. Click **Create function**.
 
@@ -324,6 +330,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 8. Click View policy document, then click Edit, when warning pumps out, click OK.
 
+```
     {
           "Version": "2012-10-17",
           "Statement": [
@@ -343,7 +350,8 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
                }
         ]
     }
-    
+```
+
 9. After creating the lambda function, copy the [**deviceON.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceON.js) code and paste it to the Lambda code field, then save.
 
 10. Remember to **replace your endpoint** with the **end point** in **step 4.5** and click save.
@@ -358,10 +366,11 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 13. You can see there is no shadow for the device, so we need to create one.
 
-14. Back to MQTT.fx, type **$aws/things/air_cleaner_demo/shadow/update** as topic name.
+14. Back to MQTT.fx, type **$aws/things/<your_thing_name>/shadow/update** as topic name.
 
 15. Copy below code and paste it into the field. This action tries to report the air cleaner current status to shadow engine.
 
+```
     {
         "state": {
             "reported": {
@@ -369,6 +378,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
             }
         }
     }
+```
 
 <p align="center">
     <img src="images/16.png" width="70%" height="70%">
@@ -384,6 +394,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 18. Copy below code to MQTT.fx, and change the pm value to **50**, air quality to **RED**.
 
+```
     {
         "id": "12345678",
         "type": "air_cleaner",
@@ -392,6 +403,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
         "pm": 1,
         "quality": "Green"
     }
+```
 
 19. Now **Publish** it, you should receive a warning email, and go back to see the thing shadow, it should have the desired state.
 
@@ -405,7 +417,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 22. Type the following SQL script into **Rule query statement**:
 ```
-SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
+SELECT * FROM 'device/<your-thing-name>' WHERE pm = 20 AND power = "ON"
 ```
 23. Click Add action, click **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
@@ -427,7 +439,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
 
 32. Back to MQTT.fx, type **device/aircleaner** and change the pm value to **20**, power to **ON**, and air quality to **GREEN**, then **Publish**.
 
-33. You can go back the thing shadow to see the desired state is changed to OFF.
+36. You can go back the thing shadow to see the desired state is changed to OFF.
 
 <p align="center">
     <img src="images/18.png" width="70%" height="70%">
