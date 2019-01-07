@@ -195,47 +195,50 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 3. Type **Save_in_DynamoDB** as name and description.
 
-4. Copy and paste the following SQL script into **Rule query statement**:
+4. Go back to MQTT.fx, type **device/aircleaner** as topic name.
+
+5. Copy the [**air_cleaner.json**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_cleaner.json) code and paste to MQTT.fx, then click **Publish**.
+
+
+6. Copy and paste the following SQL script into **Rule query statement**:
 ```
-SELECT * FROM 'device/<your-thing-name>'
+SELECT * FROM 'device/aircleaner'
 ```
 <p align="center">
     <img src="images/5_6_create_rule.png" width="70%" height="70%">
 </p>
 
-5. Click **Add action** in set one or more actions. 
+7. Click **Add action** in set one or more actions. 
 
-6. Select **Insert a message into a DynamoDB table**, then click **Configure action**.
+8. Select **Insert a message into a DynamoDB table**, then click **Configure action**.
 
-7. Click **Create a new resource**.
+9. Click **Create a new resource**.
 
-8. Click **Create table**.
+10. Click **Create table**.
 
-9. Type **air_cleaner_message** as Table name.
+11. Type **air_cleaner_message** as Table name.
 
-10. Type **device_id** as Partition key, then click **Create**.
+12. Type **device_id** as Partition key, then click **Create**.
 
-11. Back to IoT rule create page, click reload and choose **air_cleaner_message**.
+13. Back to IoT rule create page, click reload and choose **air_cleaner_message**.
 
-12. Type **$id** as Partition key value.
+14. Type **$id** as Partition key value.
 
-13. Click **Create a new role**.
+15. Click **Create a new role**.
 
-14. Type **IoT_save_DynamoDB** as role name, then click **Create a new role**.
+16. Type **IoT_save_DynamoDB** as role name, then click **Create a new role**.
 
-15. Select the **IoT_save_DynamoDB** role, and click **Add action**. 
+17. Select the **IoT_save_DynamoDB** role, and click **Add action**. 
 
 <p align="center">
     <img src="images/configure_action.png" width="70%" height="70%">
 </p>
 
-16. Click **Create rule**.
+18. Click **Create rule**.
 
-17. Go back MQTT.fx, type **device/<your_thing_name>** as topic name.
+19. Go back to MQTT.fx, then click **Publish** again.
 
-18. Copy the [**air_cleaner.json**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_cleaner.json) code and paste to MQTT.fx, then click **Publish**.
-
-19. Go back to DynamoDB page, and you will see the message save in the table.
+20. Go back to DynamoDB page, and you will see the message save in the table.
 
 
 ### Send an Email when Air Quality reach a threshold
@@ -244,29 +247,35 @@ SELECT * FROM 'device/<your-thing-name>'
 
 2. Type **send_warning_email** as name.
 
-3. Type the following SQL script into **Rule query statement**:
+3. Go to MQTT.fx, set pm value as **50**, and set quality as **RED**, then click **Publish**.
+
+<p align="center">
+    <img src="images/14.png" width="70%" height="70%">
+</p>
+
+4. Type the following SQL script into **Rule query statement**:
 
 ```
-SELECT * FROM 'device/<your-thing-name>' WHERE pm = 50
+SELECT * FROM 'device/aircleaner' WHERE pm = 50
 ```
 
 <p align="center">
     <img src="images/6_3_send_warning_email.PNG" width="70%" height="70%">
 </p>
 
-4. Click **Add action** in set one or more actions.
+5. Click **Add action** in set one or more actions.
 
-5. Select **Invoke a Lambda function passing the message data**, then click **Configure action**.
+6. Select **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
-6. Click **Create a new Lambda function**.
+7. Click **Create a new Lambda function**.
 
-7. Type **Airwarning** as Lambda name.
+8. Type **Airwarning** as Lambda name.
 
-8. Select **Create a custom role**.
+9. Select **Create a custom role**.
 
-9. Click **View policy document**, then click **Edit**, when warning pumps out, click **OK**.
+10. Click **View policy document**, then click **Edit**, when warning pumps out, click **OK**.
 
-10. Copy below code and paste it into the policy document, then click **Allow**.
+11. Copy below code and paste it into the policy document, then click **Allow**.
 
 ```
     {
@@ -290,27 +299,23 @@ SELECT * FROM 'device/<your-thing-name>' WHERE pm = 50
     }
 ```
 
-11. Click **Create function**.
+12. Click **Create function**.
 
-12. Copy [**air_quality_harmful.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_quality_harmful.js) code, and paste it into Lambda code field.
+13. Copy [**air_quality_harmful.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/air_quality_harmful.js) code, and paste it into Lambda code field.
 
-13. In **Environment variables** section, type **email** as key, type your email as value, then click **Save**.
+14. In **Environment variables** section, type **email** as key, type your email as value, then click **Save**.
 
-14. Back to IoT rule create page, click refresh and select **Airwarning**, then click **Add action**.
+15. Back to IoT rule create page, click refresh and select **Airwarning**, then click **Add action**.
 
 <p align="center">
     <img src="images/13.png" width="70%" height="70%">
 </p>
 
-15. Click **Create rule**.
+16. Click **Create rule**.
 
-16. Go to MQTT.fx, set pm value as **50**, and set quality as **RED**, then click **Publish**.
+17. Go back to MQTT.fx, then click **Publish** again.
 
-<p align="center">
-    <img src="images/14.png" width="70%" height="70%">
-</p>
-
-17. You will receive an email that contains device name, pm value, and air quality level.
+18. You will receive an email that contains device name, pm value, and air quality level.
 
 ### Use Rule to trigger Open and Shutdown Device
 
@@ -366,7 +371,7 @@ SELECT * FROM 'device/<your-thing-name>' WHERE pm = 50
 
 13. You can see there is no shadow for the device, so we need to create one.
 
-14. Back to MQTT.fx, type **$aws/things/<your_thing_name>/shadow/update** as topic name.
+14. Back to MQTT.fx, type **$aws/things/air_cleaner_demo/shadow/update** as topic name.
 
 15. Copy below code and paste it into the field. This action tries to report the air cleaner current status to shadow engine.
 
@@ -415,31 +420,33 @@ SELECT * FROM 'device/<your-thing-name>' WHERE pm = 50
 
 21. Type **Device_Auto_OFF** as the name.
 
-22. Type the following SQL script into **Rule query statement**:
+22. Back to MQTT.fx, type **device/aircleaner** and change the pm value to **20**, power to **ON**, and air quality to **GREEN**, then **Publish**.
+
+23. Type the following SQL script into **Rule query statement**:
 ```
-SELECT * FROM 'device/<your-thing-name>' WHERE pm = 20 AND power = "ON"
+SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
 ```
-23. Click Add action, click **Invoke a Lambda function passing the message data**, then click **Configure action**.
+24. Click Add action, click **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
-24. Click **Create a new lambda function**.
+25. Click **Create a new lambda function**.
 
-25. Type **ShutdownDevice** as name.
+26. Type **ShutdownDevice** as name.
 
-26. Select **Choose an existing role** as Role.
+27. Select **Choose an existing role** as Role.
 
-27. Select **Lambda_send_mqtt** as Existing role, then Click **Create function**.
+28. Select **Lambda_send_mqtt** as Existing role, then Click **Create function**.
 
-28. Copy the [**deviceOFF.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceOFF.js) code and paste it to the Lambda code field.
+29. Copy the [**deviceOFF.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceOFF.js) code and paste it to the Lambda code field.
 
-29. Remember to change your endpoint.
+30. Remember to change your endpoint.
 
-30. Click **Save**, and back to rule page, click reload and select **ShutdownDevice**, then click **Add action**.
+31. Click **Save**, and back to rule page, click reload and select **ShutdownDevice**, then click **Add action**.
 
-31. Click **Create rule**.
+32. Click **Create rule**.
 
-32. Back to MQTT.fx, type **device/aircleaner** and change the pm value to **20**, power to **ON**, and air quality to **GREEN**, then **Publish**.
+33. Go bck to MQTT.fx, then click **Publish** again.
 
-36. You can go back the thing shadow to see the desired state is changed to OFF.
+34. You can go back the thing shadow to see the desired state is changed to OFF.
 
 <p align="center">
     <img src="images/18.png" width="70%" height="70%">
@@ -467,6 +474,5 @@ Congratulations! You now have learned how to:
 * How to register a device as a thing.
 * Using Rule Engine to trigger other AWS service.
 * Using Shadow Engine to update device states.
-
 
 
