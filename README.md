@@ -204,6 +204,10 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 ```
 SELECT * FROM 'device/aircleaner'
 ```
+
+>  The `device/aircleaner` must be the same as the topic of your IoT device. If you customize the topic name, please modify to ***\<YOUR-TOPIC-NAME\>***
+.
+
 <p align="center">
     <img src="images/5_6_create_rule.png" width="70%" height="70%">
 </p>
@@ -258,6 +262,9 @@ SELECT * FROM 'device/aircleaner'
 ```
 SELECT * FROM 'device/aircleaner' WHERE pm = 50
 ```
+
+>  The `device/aircleaner` must be the same as the topic of your IoT device. If you customize the topic name, please modify to ***\<YOUR-TOPIC-NAME\>***
+.
 
 <p align="center">
     <img src="images/6_3_send_warning_email.PNG" width="70%" height="70%">
@@ -426,6 +433,10 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 ```
 SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
 ```
+
+>  The `device/aircleaner` must be the same as the topic of your IoT device. If you customize the topic name, please modify to ***\<YOUR-TOPIC-NAME\>***
+.
+
 24. Click Add action, click **Invoke a Lambda function passing the message data**, then click **Configure action**.
 
 25. Click **Create a new lambda function**.
