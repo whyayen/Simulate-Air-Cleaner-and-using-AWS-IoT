@@ -366,7 +366,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 9. After creating the lambda function, copy the [**deviceON.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceON.js) code and paste it to the Lambda code field, then save.
 
-10. Remember to **replace your endpoint** with the **end point** in **step 4.5** and click save.
+10. Remember to **replace your endpoint** with the **end point** in **Add the Certificates to MQTT.fx and Test** step 5 and click save.
 
 <p align="center">
     <img src="images/15.png" width="70%" height="70%">
