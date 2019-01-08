@@ -163,14 +163,14 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 16. Type **/test/topic** in the topic field, and copy below code and paste into the blank field:
 
 ```
-    {
-        "id": "12345678",
-        "type": "air_cleaner",
-        "name": "Demo",
-        "power": "OFF",
-        "pm": 1,
-        "quality": "Green"
-    }
+{
+    "id": "12345678",
+    "type": "air_cleaner",
+    "name": "Demo",
+    "power": "OFF",
+    "pm": 1,
+    "quality": "Green"
+}
 ```
 
 <p align="center">
@@ -285,25 +285,25 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 11. Copy below code and paste it into the policy document, then click **Allow**.
 
 ```
-    {
-          "Version": "2012-10-17",
-          "Statement": [
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
             {
-                  "Effect": "Allow",
-                 "Action": [
-                    "logs:CreateLogGroup",
-                    "logs:CreateLogStream",
-                    "logs:PutLogEvents"
-                  ],
-                  "Resource": "arn:aws:logs:*:*:*"
-            },
-            {
-                  "Effect": "Allow",
-                  "Action": "sns:*",
-                  "Resource": "arn:aws:sns:*:*:*"
+                "Effect": "Allow",
+                "Action": "sns:*",
+                "Resource": "arn:aws:sns:*:*:*"
             }
-          ]
-    }
+    ]
+}
 ```
 
 12. Click **Create function**.
@@ -343,25 +343,25 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 8. Click View policy document, then click Edit, when warning pumps out, click OK.
 
 ```
-    {
-          "Version": "2012-10-17",
-          "Statement": [
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
             {
-                  "Effect": "Allow",
-                  "Action": [
-                    "logs:CreateLogGroup",
-                    "logs:CreateLogStream",
-                    "logs:PutLogEvents"
-                  ],
-                  "Resource": "arn:aws:logs:*:*:*"
-            },
-               {
-                  "Effect": "Allow",
-                  "Action": "iot:*",
-                  "Resource": "arn:aws:iot:*:*:*"
-               }
-        ]
-    }
+                "Effect": "Allow",
+                "Action": "iot:*",
+                "Resource": "arn:aws:iot:*:*:*"
+            }
+    ]
+}
 ```
 
 9. After creating the lambda function, copy the [**deviceON.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceON.js) code and paste it to the Lambda code field, then save.
@@ -383,13 +383,13 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 15. Copy below code and paste it into the field. This action tries to report the air cleaner current status to shadow engine.
 
 ```
-    {
-        "state": {
-            "reported": {
-                "power": "OFF"
-            }
+{
+    "state": {
+        "reported": {
+            "power": "OFF"
         }
     }
+}
 ```
 
 <p align="center">
@@ -407,14 +407,14 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 18. Copy below code to MQTT.fx, and change the pm value to **50**, air quality to **RED**.
 
 ```
-    {
-        "id": "12345678",
-        "type": "air_cleaner",
-        "name": "Demo",
-        "power": "OFF",
-        "pm": 1,
-        "quality": "Green"
-    }
+{
+    "id": "12345678",
+    "type": "air_cleaner",
+    "name": "Demo",
+    "power": "OFF",
+    "pm": 1,
+    "quality": "Green"
+}
 ```
 
 19. Now **Publish** it, you should receive a warning email, and go back to see the thing shadow, it should have the desired state.
