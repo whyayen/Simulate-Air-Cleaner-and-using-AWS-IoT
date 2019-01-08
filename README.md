@@ -130,7 +130,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 4. Go back to IoT thing, click the thing you create previously, then click **Interact**.
 
 5. Copy the **endpoint**.
-> Note: You can write down or copy the endpoint to a text file because it will be used in step 7.10.
+> Note: You can write down or copy the endpoint to a text file because it will be used in **Use Rule to trigger Open and Shutdown Device** step 10.
 
 <p align="center">
     <img src="images/7.png" width="70%" height="70%">
@@ -366,7 +366,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 9. After creating the lambda function, copy the [**deviceON.js**](https://github.com/ecloudvalley/Simulate-Air-Cleaner-and-using-AWS-IoT/blob/master/deviceON.js) code and paste it to the Lambda code field, then save.
 
-10. Remember to **replace your endpoint** with the **end point** in **Add the Certificates to MQTT.fx and Test** step 5 and click save.
+10. Remember to **replace your endpoint** with the **end point** in Add the Certificates to MQTT.fx and Test step 5 and click save.
 
 <p align="center">
     <img src="images/15.png" width="70%" height="70%">
