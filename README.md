@@ -328,7 +328,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 1. At IoT **Act** page, click **send_warning_email**.
 
-2. Click **Add action**, then click **Invoke a Lambda function passing the message data**, then click **Configure action**.
+2. Click **Add action**, then click **Send a message to a Lambda function**, then click **Configure action**.
 
 3. Click **Create a new lambda function**.
 
@@ -437,7 +437,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 20 AND power = "ON"
 >  The `device/aircleaner` must be the same as the topic of your IoT device. If you customize the topic name, please modify to ***\<YOUR-TOPIC-NAME\>***
 .
 
-24. Click Add action, click **Invoke a Lambda function passing the message data**, then click **Configure action**.
+24. Click Add action, click **Send a message to a Lambda function**, then click **Configure action**.
 
 25. Click **Create a new lambda function**.
 
