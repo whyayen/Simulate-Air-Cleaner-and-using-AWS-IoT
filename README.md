@@ -45,7 +45,7 @@ In this scenario, we will use MQTT.fx to simulate an air cleaner. It will send s
 
 1. Click **Things** under Manage at left navigation bar.
 
-2. Click **Register a thing**.
+2. Click **Create**.
 
 3. Click **Create a single thing**.
 
@@ -272,7 +272,7 @@ SELECT * FROM 'device/aircleaner' WHERE pm = 50
 
 5. Click **Add action** in set one or more actions.
 
-6. Select **Invoke a Lambda function passing the message data**, then click **Configure action**.
+6. Select **Send a message to a Lambda function**, then click **Configure action**.
 
 7. Click **Create a new Lambda function**.
 
